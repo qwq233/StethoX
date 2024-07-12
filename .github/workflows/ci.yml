@@ -25,17 +25,6 @@ jobs:
           fetch-depth: 0
           path: StethoX
 
-      - name: Write key
-        if: ${{ ( github.event_name != 'pull_request' && github.ref == 'refs/heads/master' ) || github.ref_type == 'tag' }}
-        run: |
-          if [ ! -z "${{ secrets.KEY_STORE }}" ]; then
-            echo androidStorePassword='${{ secrets.KEY_STORE_PASSWORD }}' >> gradle.properties
-            echo androidKeyAlias='${{ secrets.ALIAS }}' >> gradle.properties
-            echo androidKeyPassword='${{ secrets.KEY_PASSWORD }}' >> gradle.properties
-            echo androidStoreFile='key.jks' >> gradle.properties
-            echo ${{ secrets.KEY_STORE }} | base64 --decode > key.jks
-          fi
-
       - name: Checkout rhino
         uses: actions/checkout@v3
         with:
@@ -80,13 +69,7 @@ jobs:
       - name: Build with Gradle
         working-directory: StethoX
         run: |
-          ./gradlew app:assemble
-
-      - name: Upload release
-        uses: actions/upload-artifact@v3
-        with:
-          name: "StethoX-release-ci.apk"
-          path: "./StethoX/app/build/outputs/apk/release/app-release.apk"
+          ./gradlew app:assembleDebug
 
       - name: Upload debug
         uses: actions/upload-artifact@v3
