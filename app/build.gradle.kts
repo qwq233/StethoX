@@ -227,7 +227,7 @@ task("generateDefaultOkHttp3Helper") {
 
 dependencies {
     implementation("androidx.annotation:annotation:1.7.0")
-    implementation("androidx.core:core-ktx:+")
+    implementation("androidx.core:core-ktx:1.13.1")
     compileOnly("de.robv.android.xposed:api:82")
     compileOnly(project(":hidden-api"))
     implementation("com.github.5ec1cff.stetho:stetho:1.0-alpha-1")
