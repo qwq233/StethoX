@@ -34,7 +34,7 @@ jobs:
       - name: Checkout stetho
         uses: actions/checkout@v3
         with:
-          repository: 5ec1cff/stetho
+          repository: qwq233/stetho
           path: stetho
 
       - name: Setup Java
